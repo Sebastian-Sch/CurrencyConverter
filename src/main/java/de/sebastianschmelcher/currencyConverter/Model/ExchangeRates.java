@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class ExchangeRates {
 
 	private String base;
-	private Map<String,String> rates;
+	private Map<String,Double> rates;
 	
     public String getBase() {
 		return base;
@@ -15,10 +15,10 @@ public class ExchangeRates {
 	public void setBase(String base) {
 		this.base = base;
 	}
-	public Map<String, String> getRates() {
+	public Map<String, Double> getRates() {
 		return rates;
 	}
-	public void setRates(Map<String, String> rates) {
+	public void setRates(Map<String, Double> rates) {
 		this.rates = rates;
 	}
 }

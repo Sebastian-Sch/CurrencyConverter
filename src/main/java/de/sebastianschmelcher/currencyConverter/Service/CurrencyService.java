@@ -12,7 +12,7 @@ public class CurrencyService {
 	@Autowired
 	RestTemplate restTemplate;
 	
-	public String get(String isocode) {
+	public Double get(String isocode) {
         ExchangeRates rates = restTemplate.getForObject("https://openexchangerates.org/api/latest.json?app_id=6c14be99a0db4e249861034380e42631", ExchangeRates.class);
 		return rates.getRates().get(isocode);
 	}
