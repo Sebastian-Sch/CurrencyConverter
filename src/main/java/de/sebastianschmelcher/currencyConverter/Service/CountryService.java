@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import de.sebastianschmelcher.currencyConverter.Model.Country;
 import de.sebastianschmelcher.currencyConverter.Repositories.CountryRepository;
 
-@Service("CountryService")
+@Service
 public class CountryService {
 	
 	@Autowired

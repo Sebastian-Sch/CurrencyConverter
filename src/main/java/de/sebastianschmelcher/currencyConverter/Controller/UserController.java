@@ -41,7 +41,7 @@ public class UserController {
     		model.addAttribute("countries", countryService.getAllCountriesForForm());
     		return "register";
     	}
-    	userService.createUser(userForm.getUsername(), userForm.getPassword());
+    	userService.createUserFromForm(userForm);
     	return "registerSuccess";
     }
 }

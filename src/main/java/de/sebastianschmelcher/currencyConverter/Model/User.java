@@ -8,9 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 public class User {
+	
+	@Transient
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -74,6 +82,6 @@ public class User {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = passwordEncoder.encode(password);
 	}
 }

@@ -5,8 +5,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import de.sebastianschmelcher.currencyConverter.Model.Address;
+import de.sebastianschmelcher.currencyConverter.Repositories.CountryRepository;
+
 
 public class AddressForm {
+	@Autowired
+	CountryRepository countryRepository;
 	
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -43,4 +50,12 @@ public class AddressForm {
 		this.country = country;
 	}
 	
+	public Address toAddress() {
+		Address address = new Address();
+		address.setCity(this.getCity());
+		address.setCountry(countryRepository.findByIsocode(this.getCountry()));
+		address.setStreet(this.getStreet());
+		address.setZip(this.getZip());
+		return address;
+	} 
 }
