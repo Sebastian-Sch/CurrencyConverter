@@ -1,0 +1,9 @@
+de\sebastianschmelcher\currencyConverter\Model\Address.class
+de\sebastianschmelcher\currencyConverter\Controller\CurrencyController.class
+de\sebastianschmelcher\currencyConverter\Service\CCUserDetailsService.class
+de\sebastianschmelcher\currencyConverter\Model\User.class
+de\sebastianschmelcher\currencyConverter\SecurityConfig.class
+de\sebastianschmelcher\currencyConverter\CurrencyConverter.class
+de\sebastianschmelcher\currencyConverter\Controller\UserController.class
+de\sebastianschmelcher\currencyConverter\Repositories\UserRepository.class
+de\sebastianschmelcher\currencyConverter\Model\Country.class
