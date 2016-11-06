@@ -8,7 +8,7 @@
 	<#if conversionResult??>
 		<div class="row alert alert-success">
 			<p class="lead">Result:</p>
-			<p>${conversionResult.date?datetime}
+			<p>${conversionResult.conversionDate?datetime}
 				,${conversionResult.sourceAmount}
 				,${conversionResult.sourceCurrencyIsocode}
 				,${conversionResult.targetAmount}
@@ -40,7 +40,7 @@
 			<ul class="list-group">
 			<#list lastConversionResults as row>
 				<li class="list-group-item">
-					${row.date?datetime}
+					${row.conversionDate?datetime}
 					,${row.sourceAmount}
 					,${row.sourceCurrencyIsocode}
 					,${row.targetAmount}

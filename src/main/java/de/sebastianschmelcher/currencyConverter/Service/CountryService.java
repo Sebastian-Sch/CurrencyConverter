@@ -16,7 +16,7 @@ public class CountryService {
 	CountryRepository countryRepository;
 	
 	public Map<String,String> getAllCountriesForForm(){
-		Iterable<Country> countries = countryRepository.findAll();
+		Iterable<Country> countries = countryRepository.findAllByOrderByNameAsc();
 		Map<String,String> allCountries = new HashMap<String,String>();
 		
 		countries.forEach( country -> {

@@ -93,7 +93,7 @@ public class CurrencyService {
 	
 	public Map<String,String> getAllCurrenciesForForm()
 	{
-		Iterable<Currency> currencies = currencyRepository.findAll();
+		Iterable<Currency> currencies = currencyRepository.findAllByOrderByNameAsc();
 		Map<String,String> allCurrencies = new HashMap<String,String>();
 		
 		currencies.forEach( currency -> {

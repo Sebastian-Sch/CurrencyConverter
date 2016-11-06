@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 
 @Entity
 public class User {	
@@ -24,8 +25,11 @@ public class User {
     private Date dateOfBirth;
     private String username;
     private String password;
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", targetEntity = ConversionResult.class)
+    @OrderBy("created DESC")
     private List<ConversionResult> conversions;
+    
 	@OneToOne(cascade = CascadeType.ALL)
     private Address address;
        

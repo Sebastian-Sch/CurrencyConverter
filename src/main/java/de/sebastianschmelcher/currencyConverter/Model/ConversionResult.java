@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 @Entity
 public class ConversionResult {
@@ -15,7 +16,9 @@ public class ConversionResult {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     
-	private Date date;
+    private Date created;
+
+	private Date conversionDate;
 	private String sourceCurrencyIsocode;
 	private String targetCurrencyIsocode;
 	private Double sourceAmount;
@@ -23,17 +26,22 @@ public class ConversionResult {
 	@ManyToOne
 	private User user;
 	
+	@PrePersist
+	protected void onCreate() {
+		setCreated(new Date());
+	}
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getDate() {
-		return date;
+	public Date getConversionDate() {
+		return conversionDate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setConversionDate(Date date) {
+		this.conversionDate = date;
 	}
 	public String getSourceCurrencyIsocode() {
 		return sourceCurrencyIsocode;
@@ -64,6 +72,12 @@ public class ConversionResult {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 	
 }
