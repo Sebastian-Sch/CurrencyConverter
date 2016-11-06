@@ -54,7 +54,7 @@ public class ConversionForm {
 	public ConversionResult toConversionResult(User user, Map<String,BigDecimal> rates)
 	{
 		ConversionResult result = new ConversionResult();
-		result.setDate(this.getDate());
+		result.setDate(this.getDate() != null ? this.getDate() : new Date());
 		result.setSourceAmount(this.getAmount());
 		
 		if(rates.containsKey(this.getSourceCurrencyIsocode()) && rates.containsKey(this.getTargetCurrencyIsocode()))

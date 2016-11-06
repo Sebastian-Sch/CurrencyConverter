@@ -24,7 +24,17 @@
 			</form>
 		</div>
 		<#if lastConversionResults?size gt 0>
-			${lastConversionResults?size}
+			<ul class="list-group">
+			<#list lastConversionResults as row>
+				<li class="list-group-item">
+					${row.date?datetime}
+					,${row.sourceAmount}
+					,${row.sourceCurrencyIsocode}
+					,${row.targetAmount}
+					,${row.targetCurrencyIsocode}
+				</li>
+			</#list>
+			</ul>
 		</#if>
 	</div>
 </@layout.master>
