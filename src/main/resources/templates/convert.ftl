@@ -9,11 +9,11 @@
 		<#if conversionResult??>
 			<div class="row">
 				<p class="lead">Result:</p>
-				<p>${row.date?datetime}
-					,${row.sourceAmount}
-					,${row.sourceCurrencyIsocode}
-					,${row.targetAmount}
-					,${row.targetCurrencyIsocode}</p>
+				<p>${conversionResult.date?datetime}
+					,${conversionResult.sourceAmount}
+					,${conversionResult.sourceCurrencyIsocode}
+					,${conversionResult.targetAmount}
+					,${conversionResult.targetCurrencyIsocode}</p>
 			</div>
 		</#if>
 		<div class="row">
