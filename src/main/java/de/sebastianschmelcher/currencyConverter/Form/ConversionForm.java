@@ -61,7 +61,7 @@ public class ConversionForm {
 		{
 			BigDecimal sourceFactor = rates.get(getSourceCurrencyIsocode());
 			BigDecimal targetFactor = rates.get(getTargetCurrencyIsocode());
-			BigDecimal factor = targetFactor.setScale(5).divide(sourceFactor, BigDecimal.ROUND_HALF_UP);
+			BigDecimal factor = targetFactor.setScale(5, BigDecimal.ROUND_HALF_UP).divide(sourceFactor, BigDecimal.ROUND_HALF_UP);
 			result.setTargetAmount(BigDecimal.valueOf(this.getAmount()).multiply(factor).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 		}
 		

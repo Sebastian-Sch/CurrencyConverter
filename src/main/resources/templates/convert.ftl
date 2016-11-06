@@ -9,16 +9,20 @@
 		<#if conversionResult??>
 			<div class="row">
 				<p class="lead">Result:</p>
-				<p>${conversionResult.targetAmount}</p>
+				<p>${row.date?datetime}
+					,${row.sourceAmount}
+					,${row.sourceCurrencyIsocode}
+					,${row.targetAmount}
+					,${row.targetCurrencyIsocode}</p>
 			</div>
 		</#if>
 		<div class="row">
 			<form action="/convert" method="POST" class="form-horizontal">
 				<div class="form-group">
 					<@form.input path="conversionForm.date" placeholder="dd/MM/YYYY"/>
-					<@form.input path="conversionForm.sourceCurrencyIsocode"/>
+					<@form.select path="conversionForm.sourceCurrencyIsocode" options=currencies />
 					<@form.input path="conversionForm.amount" type="number" min="0" step="0.01"/>
-					<@form.input path="conversionForm.targetCurrencyIsocode"/>
+					<@form.select path="conversionForm.targetCurrencyIsocode" options=currencies />
 				</div>
 				<button type="submit" class="btn btn-success pull-right">Convert</button>    
 			</form>

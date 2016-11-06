@@ -1,4 +1,4 @@
-package de.sebastianschmelcher.currencyConverter.Model;
+package de.sebastianschmelcher.currencyConverter.Mapper;
 import java.math.BigDecimal;
 import java.util.Map;
 
