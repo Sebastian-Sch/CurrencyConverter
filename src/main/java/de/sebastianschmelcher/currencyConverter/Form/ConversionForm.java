@@ -10,14 +10,15 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import de.sebastianschmelcher.currencyConverter.Exception.ConversionNotPossibleException;
 import de.sebastianschmelcher.currencyConverter.Model.ConversionResult;
 import de.sebastianschmelcher.currencyConverter.Model.User;
 
 
 public class ConversionForm {
     
-	@DateTimeFormat(pattern = "dd/MM/YYYY")
 	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date date;
 	@Size(min = 3, max =3)
 	private String sourceCurrencyIsocode;
@@ -57,18 +58,28 @@ public class ConversionForm {
 		result.setDate(this.getDate() != null ? this.getDate() : new Date());
 		result.setSourceAmount(this.getAmount());
 		
-		if(rates.containsKey(this.getSourceCurrencyIsocode()) && rates.containsKey(this.getTargetCurrencyIsocode()))
+		if(!rates.containsKey(this.getSourceCurrencyIsocode()))
+		{
+			throwException(this.getSourceCurrencyIsocode());
+		}
+		else if(!rates.containsKey(this.getTargetCurrencyIsocode()))
+		{
+			throwException(this.getTargetCurrencyIsocode());
+		}
+		else
 		{
 			BigDecimal sourceFactor = rates.get(getSourceCurrencyIsocode());
 			BigDecimal targetFactor = rates.get(getTargetCurrencyIsocode());
 			BigDecimal factor = targetFactor.setScale(5, BigDecimal.ROUND_HALF_UP).divide(sourceFactor, BigDecimal.ROUND_HALF_UP);
 			result.setTargetAmount(BigDecimal.valueOf(this.getAmount()).multiply(factor).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 		}
-		
 		result.setSourceCurrencyIsocode(this.getSourceCurrencyIsocode());
 		result.setTargetCurrencyIsocode(this.getTargetCurrencyIsocode());
 		
 		result.setUser(user);
 		return result;
+	}
+	private void throwException(String currencyIso) {
+		throw new ConversionNotPossibleException("Currency [" + currencyIso + "] not available for desired date.");
 	}
 }

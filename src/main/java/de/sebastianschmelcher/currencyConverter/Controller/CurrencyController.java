@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.HttpClientErrorException;
 
+import de.sebastianschmelcher.currencyConverter.Exception.ConversionNotPossibleException;
 import de.sebastianschmelcher.currencyConverter.Form.ConversionForm;
 import de.sebastianschmelcher.currencyConverter.Service.CurrencyService;
 
@@ -37,9 +37,9 @@ public class CurrencyController {
     	}
     	try{
     		model.addAttribute("conversionResult",currencyService.convert(conversionForm));
-    	}catch( HttpClientErrorException e)
+    	}catch( ConversionNotPossibleException e)
     	{
-    		model.addAttribute("errorMessage", "Either currency conversion factors are currently not available, or the requested conversion cannot be executed.");
+    		model.addAttribute("errorMessage", e.getMessage());
     		return "convert";
     	}
     	return "convert";

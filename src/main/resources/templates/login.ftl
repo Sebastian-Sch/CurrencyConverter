@@ -18,7 +18,6 @@
 	    <form action="/login" method="POST">
 	        <div class="form-group">
 	        	<@form.input path="loginForm.username"/>
-
 	        </div>
 	        <div class="form-group">
 	        	<@form.input path="loginForm.password" type="password"/>
