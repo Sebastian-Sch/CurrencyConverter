@@ -55,6 +55,8 @@ public class UserController {
     		return "register";
     	}
     	userService.createUserFromForm(userForm);
-    	return "redirect:/login";
+    	model.addAttribute("loginForm", new LoginForm());
+
+    	return "registerSuccess";
     }
 }
