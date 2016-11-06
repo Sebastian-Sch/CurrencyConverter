@@ -22,6 +22,7 @@
 			<div class="form-group">
 				<@form.input path="userForm.address.street"/>
 				<@form.input path="userForm.address.zip"/>
+				<@form.input path="userForm.address.city"/>
 				<@form.select path="userForm.address.country" options=countries />
 			</div>
 	  		<button type="submit" class="btn btn-success pull-right">Sign up</button>    

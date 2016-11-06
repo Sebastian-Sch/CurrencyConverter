@@ -3,9 +3,9 @@ package de.sebastianschmelcher.currencyConverter.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import de.sebastianschmelcher.currencyConverter.Converter.UserConverter;
 import de.sebastianschmelcher.currencyConverter.Form.UserForm;
 import de.sebastianschmelcher.currencyConverter.Model.User;
 import de.sebastianschmelcher.currencyConverter.Repositories.UserRepository;
@@ -14,22 +14,25 @@ import de.sebastianschmelcher.currencyConverter.Repositories.UserRepository;
 public class UserService {
 	
 	@Autowired
-	UserRepository userRepository;
+	UserConverter userConverter;
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	UserRepository userRepository;
 
 	public User createUserFromForm(UserForm userForm) {
-		return userRepository.save(userForm.toUser());	
+		return userRepository.save(userConverter.formToUser(userForm));	
 	}
 	
 	public User getCurrentUser()
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Object principal = auth.getPrincipal();
-		if(principal instanceof org.springframework.security.core.userdetails.User)
+		if(auth != null)
 		{
-			org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)principal;
-			return userRepository.findByUsername(user.getUsername());
+			Object principal = auth.getPrincipal();
+			if(principal instanceof org.springframework.security.core.userdetails.User)
+			{
+				org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)principal;
+				return userRepository.findByUsername(user.getUsername());
+			}
 		}
 		return null;
 	}

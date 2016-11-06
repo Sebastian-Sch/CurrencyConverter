@@ -9,8 +9,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import de.sebastianschmelcher.currencyConverter.Model.User;
-
 public class UserForm {
 	private static final String SIZE_MIN_2_Message = "must have min. 2 char.";
 
@@ -85,20 +83,5 @@ public class UserForm {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public User toUser() {
-		User user = new User();
-		AddressForm addressForm = this.getAddress();
-		if (addressForm != null) {
-			user.setAddress(addressForm.toAddress());
-		}
-		user.setDateOfBirth(this.getDateOfBirth());
-		user.setEmail(this.getEmail());
-		user.setFirstname(this.getFirstname());
-		user.setLastname(this.getLastname());
-		user.setPassword(this.getPassword());
-		user.setUsername(this.getUsername());
-		return user;
 	}
 }

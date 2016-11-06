@@ -3,6 +3,16 @@
 
 
 <@layout.master title="Login - Currency Converter">
+	<#if loginError>
+		<div class="row alert alert-danger">
+			<p class="lead">Username or password incorrect. Please try again</p>
+		</div>
+	</#if>
+	<#if fromLogout>
+		<div class="row alert alert-success">
+			<p class="lead">You have signed out.</p>
+		</div>
+	</#if>
 	<div class="row">
 		<p class="lead">Please sign in:</p>
 	    <form action="/login" method="POST">

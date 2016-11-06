@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import de.sebastianschmelcher.currencyConverter.Form.LoginForm;
 import de.sebastianschmelcher.currencyConverter.Form.UserForm;
@@ -29,7 +30,12 @@ public class UserController {
     }
     
     @RequestMapping(value="/login")
-    public String login(Model model) {
+    public String login(Model model, 
+    		@RequestParam(name = "error", required = false) String error,
+    		@RequestParam(name = "logout", required = false) String logout) {
+    	model.addAttribute("loginError", error != null);
+    	model.addAttribute("fromLogout", logout != null);
+    	
     	model.addAttribute("loginForm", new LoginForm());
     	return "login";
     }
@@ -49,6 +55,6 @@ public class UserController {
     		return "register";
     	}
     	userService.createUserFromForm(userForm);
-    	return "registerSuccess";
+    	return "redirect:/login";
     }
 }
