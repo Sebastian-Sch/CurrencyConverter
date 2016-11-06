@@ -1,33 +1,35 @@
 <#import "lib/layout.ftl" as layout>
 <#import "lib/form.ftl" as form>
 
-<@layout.master>
-	<div class="container">
-		<div class="row">
-			<p class="lead">Convert Currencies:</p>
+<@layout.master title="Currency Converter - convert from any currency to any currency">
+	<div class="row">
+		<p class="lead">Convert Currencies:</p>
+	</div>
+	<#if conversionResult??>
+		<div class="row alert alert-success">
+			<p class="lead">Result:</p>
+			<p>${conversionResult.date?datetime}
+				,${conversionResult.sourceAmount}
+				,${conversionResult.sourceCurrencyIsocode}
+				,${conversionResult.targetAmount}
+				,${conversionResult.targetCurrencyIsocode}</p>
 		</div>
-		<#if conversionResult??>
-			<div class="row">
-				<p class="lead">Result:</p>
-				<p>${conversionResult.date?datetime}
-					,${conversionResult.sourceAmount}
-					,${conversionResult.sourceCurrencyIsocode}
-					,${conversionResult.targetAmount}
-					,${conversionResult.targetCurrencyIsocode}</p>
+	</#if>
+	<div class="row">
+		<p class="lead">New conversion:</p>		
+		<form action="/convert" method="POST" class="form-horizontal">
+			<div class="form-group">
+				<@form.input path="conversionForm.date" placeholder="dd/MM/YYYY"/>
+				<@form.select path="conversionForm.sourceCurrencyIsocode" options=currencies />
+				<@form.input path="conversionForm.amount" type="number" min="0" step="0.01"/>
+				<@form.select path="conversionForm.targetCurrencyIsocode" options=currencies />
 			</div>
-		</#if>
+			<button type="submit" class="btn btn-success pull-right">Convert</button>    
+		</form>
+	</div>
+	<#if lastConversionResults?size gt 0>
 		<div class="row">
-			<form action="/convert" method="POST" class="form-horizontal">
-				<div class="form-group">
-					<@form.input path="conversionForm.date" placeholder="dd/MM/YYYY"/>
-					<@form.select path="conversionForm.sourceCurrencyIsocode" options=currencies />
-					<@form.input path="conversionForm.amount" type="number" min="0" step="0.01"/>
-					<@form.select path="conversionForm.targetCurrencyIsocode" options=currencies />
-				</div>
-				<button type="submit" class="btn btn-success pull-right">Convert</button>    
-			</form>
-		</div>
-		<#if lastConversionResults?size gt 0>
+			<p class="lead">Your latest results:</p>
 			<ul class="list-group">
 			<#list lastConversionResults as row>
 				<li class="list-group-item">
@@ -39,6 +41,6 @@
 				</li>
 			</#list>
 			</ul>
-		</#if>
-	</div>
+		</div>
+	</#if>
 </@layout.master>

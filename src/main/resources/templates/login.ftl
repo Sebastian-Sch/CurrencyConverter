@@ -1,23 +1,23 @@
 <#import "lib/layout.ftl" as layout>
+<#import "lib/form.ftl" as form>
 
-<@layout.master title="Currency Converter - Login">
-	Please register:
-	<a href="/register">register here</a>
-	Or convert:
-	<a href="/convert">convert here</a>
-	
-	
-    <form action="/login" method="POST">
-        <div>
-        	<label for="username">User Name</label>
-        	<input type="text" name="username" value="user"/> 
-        </div>
-        <div>
-        	<label for="password">Password</label>
-        	<input type="password" name="password" value="password"/> 
-        </div>
-        <div>
-        	<input type="submit" value="Sign In"/>
-        </div>
-    </form>	
+
+<@layout.master title="Login - Currency Converter">
+	<div class="row">
+		<p class="lead">Please sign in:</p>
+	    <form action="/login" method="POST">
+	        <div class="form-group">
+	        	<@form.input path="loginForm.username"/>
+
+	        </div>
+	        <div class="form-group">
+	        	<@form.input path="loginForm.password" type="password"/>
+	        </div>
+	  		<button type="submit" class="btn btn-success pull-right">Sign in</button>    
+	    </form>	
+	</div>
+	<div class="row alert alert-success">
+		<p class="lead">No Account yet? Please sign up:</p>
+		<a class="btn btn-success" href="/register">register here</a>
+	</div>
 </@layout.master>
