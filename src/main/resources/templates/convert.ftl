@@ -15,6 +15,13 @@
 				,${conversionResult.targetCurrencyIsocode}</p>
 		</div>
 	</#if>
+	<#if errorMessage??>
+		<div class="row alert alert-danger">
+			<p class="lead">An error occured:</p>
+			<p>${errorMessage}</p>
+		</div>
+	</#if>
+	
 	<div class="row">
 		<p class="lead">New conversion:</p>		
 		<form action="/convert" method="POST" class="form-horizontal">

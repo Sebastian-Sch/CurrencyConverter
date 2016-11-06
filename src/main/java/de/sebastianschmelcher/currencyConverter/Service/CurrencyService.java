@@ -1,5 +1,8 @@
 package de.sebastianschmelcher.currencyConverter.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,17 +31,33 @@ public class CurrencyService {
 	@Autowired
 	UserService userService;
 	
+	DateFormat df = new SimpleDateFormat("YYY-MM-dd");
+	
 	public Double get(String isocode) {
         ExchangeRates rates = restTemplate.getForObject("https://openexchangerates.org/api/latest.json?app_id=6c14be99a0db4e249861034380e42631", ExchangeRates.class);
 		return rates.getRates().get(isocode).doubleValue();
 	}
 
 	public ConversionResult convert(ConversionForm conversionForm) {
-		ExchangeRates rates = restTemplate.getForObject("https://openexchangerates.org/api/latest.json?app_id=6c14be99a0db4e249861034380e42631", ExchangeRates.class);
+		ExchangeRates rates = getRates(conversionForm);
 		User currentUser = userService.getCurrentUser();
 		ConversionResult result = conversionForm.toConversionResult(currentUser, rates.getRates());
 		conversionResultRepository.save(result);
 		return result;
+	}
+
+	private ExchangeRates getRates(ConversionForm conversionForm) {
+		ExchangeRates rates = null;
+		Date date = conversionForm.getDate();
+		if(date == null)
+		{
+			rates = restTemplate.getForObject("https://openexchangerates.org/api/latest.json?app_id=6c14be99a0db4e249861034380e42631", ExchangeRates.class);
+			conversionForm.setDate(new Date());
+		}else{
+			String url = "https://openexchangerates.org/api/historical/"+ df.format(date) +".json?app_id=6c14be99a0db4e249861034380e42631";
+			rates = restTemplate.getForObject(url, ExchangeRates.class);
+		}
+		return rates;
 	}
 	
 	public List<ConversionResult> getLastConversionResults(){
