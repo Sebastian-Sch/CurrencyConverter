@@ -3,12 +3,11 @@ package de.sebastianschmelcher.currencyConverter.Form;
 import java.util.Date;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import de.sebastianschmelcher.currencyConverter.Model.User;
 
@@ -21,6 +20,7 @@ public class UserForm {
 	private String lastname;
 	@Email
 	private String email;
+	@Past
 	@DateTimeFormat(pattern = "dd/MM/YYYY")
 	private Date dateOfBirth;
 	@Size(min = 2, message = SIZE_MIN_2_Message)

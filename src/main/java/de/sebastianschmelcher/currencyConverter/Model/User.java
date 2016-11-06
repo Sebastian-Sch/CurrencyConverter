@@ -1,12 +1,15 @@
 package de.sebastianschmelcher.currencyConverter.Model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -30,18 +33,17 @@ public class User {
     private Date dateOfBirth;
     private String username;
     private String password;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", targetEntity = ConversionResult.class)
+    private List<ConversionResult> conversions;
+	@OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    
-    public User(){
+       
+    public List<ConversionResult> getConversions() {
+    	return conversions;
     }
-    
-    public User(String username, String password){//TODO: remove if unused
-    	this.username = username;
-    	this.password = password;
+    public void setConversions(List<ConversionResult> conversions) {
+    	this.conversions = conversions;
     }
-    
 	public String getFirstname() {
 		return firstname;
 	}

@@ -1,6 +1,5 @@
 <#import "lib/layout.ftl" as layout>
 <#import "lib/form.ftl" as form>
-<#import "/spring.ftl" as spring/>
 
 <@layout.master>
 	<div class="container">

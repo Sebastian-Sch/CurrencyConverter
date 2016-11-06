@@ -14,10 +14,6 @@ import de.sebastianschmelcher.currencyConverter.Repositories.CountryRepository;
 public class AddressForm {
 	@Autowired
 	CountryRepository countryRepository;
-	
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
     
     @Size(min=2)
 	private String street;
