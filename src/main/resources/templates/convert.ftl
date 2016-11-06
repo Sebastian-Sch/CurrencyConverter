@@ -8,11 +8,7 @@
 	<#if conversionResult??>
 		<div class="row alert alert-success">
 			<p class="lead">Result:</p>
-			<p>${conversionResult.conversionDate?datetime}
-				,${conversionResult.sourceAmount}
-				,${conversionResult.sourceCurrencyIsocode}
-				,${conversionResult.targetAmount}
-				,${conversionResult.targetCurrencyIsocode}</p>
+			<p>You converted ${conversionResult.sourceAmount}&nbsp;${conversionResult.sourceCurrencyIsocode} to ${conversionResult.targetAmount}&nbsp;${conversionResult.targetCurrencyIsocode} for conversion date ${conversionResult.conversionDate?datetime}</p>
 		</div>
 	</#if>
 	<#if errorMessage??>
@@ -40,11 +36,7 @@
 			<ul class="list-group">
 			<#list lastConversionResults as row>
 				<li class="list-group-item">
-					${row.conversionDate?datetime}
-					,${row.sourceAmount}
-					,${row.sourceCurrencyIsocode}
-					,${row.targetAmount}
-					,${row.targetCurrencyIsocode}
+					You converted ${row.sourceAmount}&nbsp;${row.sourceCurrencyIsocode} to ${row.targetAmount}&nbsp;${row.targetCurrencyIsocode} for conversion date ${row.conversionDate?datetime}
 				</li>
 			</#list>
 			</ul>
