@@ -1,0 +1,6 @@
+mode=grid
+gridserver=http://192.168.0.58:4444/wd/hub
+baseurl=http://192.168.0.20:8080/
+browser=chrome
+
+screenshot.savedir = C:/selenium/
