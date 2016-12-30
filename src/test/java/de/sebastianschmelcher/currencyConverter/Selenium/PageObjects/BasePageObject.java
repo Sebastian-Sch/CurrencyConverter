@@ -1,6 +1,7 @@
 package de.sebastianschmelcher.currencyConverter.Selenium.PageObjects;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import de.sebastianschmelcher.currencyConverter.Selenium.Infrastructure.SeleniumProperty;
 import de.sebastianschmelcher.currencyConverter.Selenium.Infrastructure.SeleniumPropertyService;
@@ -60,5 +61,10 @@ public abstract class BasePageObject extends SiteObject
 			return url;
 		}
 		return url.concat("/");
+	}
+	
+	public String getPageTitle()
+	{
+		return driver.getTitle();
 	}
 }
