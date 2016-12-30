@@ -4,27 +4,29 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import de.sebastianschmelcher.currencyConverter.Selenium.Infrastructure.SeleniumProperty;
 import de.sebastianschmelcher.currencyConverter.Selenium.Infrastructure.SeleniumPropertyService;
-import de.sebastianschmelcher.currencyConverter.Selenium.Infrastructure.TakeScreenshotOnFailure;
 
-public class SeleniumTestBase
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+public abstract class SeleniumTestBase extends AbstractTestNGSpringContextTests 
 {
 
 	protected WebDriver driver;
 
-	@Rule
-	public TakeScreenshotOnFailure screenshotOnFailureRule = new TakeScreenshotOnFailure();
+//	@Rule
+//	public TakeScreenshotOnFailure screenshotOnFailureRule = new TakeScreenshotOnFailure();
 
-	@Before
+	@BeforeClass
 	public void startBrowser()
 	{
 		
@@ -52,10 +54,10 @@ public class SeleniumTestBase
 		driver.manage().deleteAllCookies();
 		// Make sure there is a timeout so that tests don't block indefinitely
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		screenshotOnFailureRule.setDriver(this.driver);
+//		screenshotOnFailureRule.setDriver(this.driver);
 	}
 
-	@After
+	@AfterClass
 	public void shutdownBrowserAfterTest()
 	{
 	   this.driver.close();
