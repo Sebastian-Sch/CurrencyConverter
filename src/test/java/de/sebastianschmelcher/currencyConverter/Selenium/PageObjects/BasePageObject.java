@@ -1,7 +1,6 @@
 package de.sebastianschmelcher.currencyConverter.Selenium.PageObjects;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import de.sebastianschmelcher.currencyConverter.Selenium.Infrastructure.SeleniumProperty;
 import de.sebastianschmelcher.currencyConverter.Selenium.Infrastructure.SeleniumPropertyService;

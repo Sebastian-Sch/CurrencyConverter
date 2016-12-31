@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SeleniumSuite">
+	<test name="ChromeSeleniumTest">
+		<parameter name="browser" value="chrome"/>
+    	<packages>
+      		<package name="de.sebastianschmelcher.currencyConverter.Selenium.Testcases" />
+   		</packages>
+   	</test>
+<!-- 	<test name="IESeleniumTest"> -->
+<!-- 		<parameter name="browser" value="ie"/> -->
+<!--     	<packages> -->
+<!--       		<package name="de.sebastianschmelcher.currencyConverter.Selenium.Testcases" /> -->
+<!--    		</packages> -->
+<!--    	</test> -->
+	<test name="FFSeleniumTest">
+		<parameter name="browser" value="phantom"/>
+    	<packages>
+      		<package name="de.sebastianschmelcher.currencyConverter.Selenium.Testcases" />
+   		</packages>
+   	</test>
+</suite>
